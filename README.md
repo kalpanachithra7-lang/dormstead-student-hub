@@ -1,14 +1,18 @@
-# Welcome to your Lovable project
+# Dormstead Student Hub
+
+hostel management website create a website with separate student and admin portal admin portal   admin portalwith email kalpanachithra7@gmail.com password kalpanachithra@2008
 
 This project was built with [Lovable](https://lovable.dev).
 
+**Live app**: https://dormstead-student-hub.lovable.app
+
 ## Build with Lovable
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+Continue developing this project in the [Lovable editor](https://lovable.dev/projects/5b2520dd-1cda-5a69-8055-d1f6c37ddc46).
 
 - **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+- **Stay in sync**: every change made in Lovable is committed straight to this repository.
+- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
 
 ## Development
 
@@ -20,10 +24,3 @@ cd <repository-name>
 npm i
 npm run dev
 ```
-
-## Built with
-
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS

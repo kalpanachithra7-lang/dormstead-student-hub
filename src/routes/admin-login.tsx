@@ -29,19 +29,19 @@ function AdminLogin() {
     e.preventDefault();
     setBusy(true);
     const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error) { setBusy(false); return toast.error(error.message); }
+    if (error) { setBusy(false); { toast.error(error.message); return; } }
     const { data: isAdmin } = await supabase.rpc("has_role", { _user_id: data.user.id, _role: "admin" });
     setBusy(false);
-    if (!isAdmin) { await supabase.auth.signOut(); return toast.error("This account is not an admin."); }
+    if (!isAdmin) { await supabase.auth.signOut(); { toast.error("This account is not an admin."); return; } }
     navigate({ to: "/admin" });
   }
 
   async function setup() {
-    if (!email || password.length < 6) return toast.error("Enter the admin email and password first.");
+    if (!email || password.length < 6) { toast.error("Enter the admin email and password first."); return; }
     setBusy(true);
     const { data, error } = await supabase.auth.signUp({ email, password, options: { emailRedirectTo: window.location.origin + "/admin" } });
     setBusy(false);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     if (!data.session) toast.success("Admin account created. Confirm it from your email inbox, then sign in.");
     else navigate({ to: "/admin" });
   }

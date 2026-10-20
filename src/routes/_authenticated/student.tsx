@@ -35,15 +35,15 @@ function StudentPortal() {
   async function addComplaint(e: React.FormEvent) {
     e.preventDefault();
     const { error } = await supabase.from("complaints").insert({ ...c, student_id: uid });
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     toast.success("Complaint submitted"); setC({ title: "", description: "" });
     qc.invalidateQueries({ queryKey: ["mycomplaints"] });
   }
   async function addLeave(e: React.FormEvent) {
     e.preventDefault();
-    if (l.to_date < l.from_date) return toast.error("End date must be after start date");
+    if (l.to_date < l.from_date) { toast.error("End date must be after start date"); return; }
     const { error } = await supabase.from("leave_requests").insert({ ...l, student_id: uid });
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     toast.success("Leave request sent"); setL({ from_date: "", to_date: "", reason: "" });
     qc.invalidateQueries({ queryKey: ["myleaves"] });
   }

@@ -47,24 +47,24 @@ function AdminPortal() {
   async function addRoom(e: React.FormEvent) {
     e.preventDefault();
     const { error } = await supabase.from("rooms").insert(nr);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     setNr({ room_number: "", block: "A", capacity: 2 }); refresh();
   }
   async function delRoom(id: string) {
     const { error } = await supabase.from("rooms").delete().eq("id", id);
-    if (error) return toast.error(error.message); refresh();
+    if (error) { toast.error(error.message); return; } refresh();
   }
   async function assign(sid: string, roomId: string) {
-    if (!roomId) { await supabase.from("allocations").delete().eq("student_id", sid); return refresh(); }
+    if (!roomId) { await supabase.from("allocations").delete().eq("student_id", sid); refresh(); return; }
     const room = rooms.data?.find((r) => r.id === roomId);
-    if (room && occupancy(roomId) >= room.capacity && roomOf(sid) !== roomId) return toast.error("Room is full");
+    if (room && occupancy(roomId) >= room.capacity && roomOf(sid) !== roomId) { toast.error("Room is full"); return; }
     const { error } = await supabase.from("allocations").upsert({ student_id: sid, room_id: roomId }, { onConflict: "student_id" });
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     toast.success("Room assigned"); refresh();
   }
   async function setStatus(table: "complaints" | "leave_requests", id: string, status: string) {
     const { error } = await supabase.from(table).update({ status }).eq("id", id);
-    if (error) return toast.error(error.message); refresh();
+    if (error) { toast.error(error.message); return; } refresh();
   }
 
   const stats = [
